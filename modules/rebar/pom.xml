@@ -1,0 +1,50 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.eatbacon</groupId>
+        <artifactId>rebar-bundle</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../..</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.eatbacon</groupId>
+    <artifactId>rebar</artifactId>
+    <packaging>jar</packaging>
+    <name>rebar</name>
+    <version>1.0.0</version>
+    <developers>
+        <developer>
+            <id>fehguy</id>
+            <name>Tony Tam</name>
+            <email>tony@eatbacon.org</email>
+        </developer>
+    </developers>
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <directory>target</directory>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>${swagger-core-version}</version>
+        </dependency>
+
+        <!-- installed by running `bindings-install.sh` -->
+        <dependency>
+            <groupId>com.apple</groupId>
+            <artifactId>fdb-java</artifactId>
+            <version>6.0.15</version>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng-version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
