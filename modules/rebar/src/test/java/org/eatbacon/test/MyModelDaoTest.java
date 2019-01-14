@@ -62,7 +62,7 @@ public class MyModelDaoTest {
         MyModelDao dao = MyModelDao.getInstance();
 
         List<MyModel> multi = dao.findAll();
-        assertTrue(multi.size() == 2);
+        assertTrue(multi.size() > 0);
     }
 
     @Test
@@ -85,8 +85,6 @@ public class MyModelDaoTest {
 
     @Test
     public void testCreateIndexes() {
-        MyModelDao dao = MyModelDao.getInstance();
-
         MyModelDao.getInstance().ensureIndex(new Index("name"));
     }
 }

@@ -426,7 +426,7 @@ public class TupleManager {
     }
 
     private static Object fromTuples(ArrayList<Tuple> tuples){
-        if(tuples == null){
+        if(tuples == null || tuples.size() == 0){
             return null;
         }
 
