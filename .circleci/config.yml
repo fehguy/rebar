@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: foundationdb/foundationdb:6.0.15
+
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      - run:
+          name: install openjdk
+          command: apt-get update && apt-get install -y openjdk-8-jdk maven
+      - run:
+          name: install fdb library to local maven repo
+          command: bash bindings-install.sh
+      - run:
+          name: start fdb server
+          command: nohup /var/fdb/scripts/fdb.bash > /dev/null & sleep 5
+      - run:
+          name: create database
+          command: fdbcli --exec "configure new single memory"
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run:
+          name: run integration tests
+          command: mvn package integration-test
