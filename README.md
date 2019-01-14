@@ -1,5 +1,7 @@
 # Rebar
 
+[![CircleCI](https://circleci.com/gh/fehguy/rebar.svg?style=svg&circle-token=26cdc6431cf8b106d3f10cda657f3cda2ff00878)](https://circleci.com/gh/fehguy/rebar)
+
 This is an experimental, light-weight library to connect Java POJOs 
 to FoundationDB. It does so by providing an extensible layer that
 sits above the raw Tuple store exposed by Foundation DB's official
