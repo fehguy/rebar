@@ -30,9 +30,6 @@ public class MyModelDaoTest {
     public void testFindById() {
         MyModelDao dao = MyModelDao.getInstance();
 
-        MyModel existing = dao.findById("1001");
-        assertNotNull(existing);
-
         MyModel model = new MyModel()
                 .id("1002")
                 .name("Bob")
@@ -45,7 +42,7 @@ public class MyModelDaoTest {
                 ).childNames(Arrays.asList(15, 16));
         dao.insert(model);
 
-        existing = dao.findById("1002");
+        MyModel existing = dao.findById("1002");
         assertNotNull(existing);
     }
 
@@ -69,17 +66,55 @@ public class MyModelDaoTest {
     public void testFindByName() {
         MyModelDao dao = MyModelDao.getInstance();
 
-        List<MyModel> filtered = dao.findByName("Bob");
+        MyModel model = new MyModel()
+                .id("1004")
+                .name("Fred")
+                .createdAt(new Date())
+                .address(new Address()
+                        .street("12345 El Monte Blvd")
+                        .city("Los Altos Hills")
+                        .state("CA")
+                        .zip("94022")
+                ).childNames(Arrays.asList(15, 16));
+        dao.insert(model);
+
+        List<MyModel> filtered = dao.findByName("Fred");
         assertTrue(filtered.size() == 1);
 
-        filtered = dao.findByName("Tony");
+
+        model = new MyModel()
+                .id("1005")
+                .name("Grant")
+                .createdAt(new Date())
+                .address(new Address()
+                        .street("12345 El Monte Blvd")
+                        .city("Los Altos Hills")
+                        .state("CA")
+                        .zip("94022")
+                ).childNames(Arrays.asList(15, 16));
+        dao.insert(model);
+
+        filtered = dao.findByName("Grant");
         assertTrue(filtered.size() == 1);
     }
 
     @Test
     public void testFindByZip() {
         MyModelDao dao = MyModelDao.getInstance();
-        List<MyModel> filtered = dao.findByZip("94022");
+
+        MyModel model = new MyModel()
+                .id("1005")
+                .name("Grant")
+                .createdAt(new Date())
+                .address(new Address()
+                        .street("12345 El Monte Blvd")
+                        .city("Los Altos Hills")
+                        .state("CA")
+                        .zip("94022-1993")
+                ).childNames(Arrays.asList(15, 16));
+        dao.insert(model);
+
+        List<MyModel> filtered = dao.findByZip("94022-1993");
         assertTrue(filtered.size() == 1);
     }
 
