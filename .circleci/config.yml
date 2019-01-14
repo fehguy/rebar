@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run: apt-get update && apt-get install -y openjdk-8-jdk maven
       - run: bash bindings-install.sh
-      - run: bash /var/fdb/scripts/fdb.bash & sleep 10
+      - run: nohup /var/fdb/scripts/fdb.bash > /dev/null & sleep 5
       - run: fdbcli --exec "configure new single memory"
 
       - restore_cache:
