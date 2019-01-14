@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: foundationdb/foundationdb:6.0.15
-      - image: circleci/openjdk:8-jdk
 
     working_directory: ~/repo
 
@@ -12,7 +11,7 @@ jobs:
 
     steps:
       - checkout
-
+      - run: apt-get update && apt-get install -y openjdk-8-jdk maven
       - run: bash bindings-install.sh
 
       - restore_cache:
