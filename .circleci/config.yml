@@ -11,10 +11,18 @@ jobs:
 
     steps:
       - checkout
-      - run: apt-get update && apt-get install -y openjdk-8-jdk maven
-      - run: bash bindings-install.sh
-      - run: nohup /var/fdb/scripts/fdb.bash > /dev/null & sleep 5
-      - run: fdbcli --exec "configure new single memory"
+      - run:
+          name: install openjdk
+          command: apt-get update && apt-get install -y openjdk-8-jdk maven
+      - run:
+          name: install fdb library to local maven repo
+          command: bash bindings-install.sh
+      - run:
+          name: start fdb server
+          command: nohup /var/fdb/scripts/fdb.bash > /dev/null & sleep 5
+      - run:
+          name: create database
+          command: fdbcli --exec "configure new single memory"
 
       - restore_cache:
           keys:
@@ -28,4 +36,6 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run: mvn package integration-test
+      - run:
+          name: run integration tests
+          command: mvn package integration-test
