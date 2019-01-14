@@ -12,6 +12,8 @@ jobs:
     steps:
       - checkout
 
+      - run: bash bindings-install.sh
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
@@ -24,4 +26,4 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run: mvn integration-test
+      - run: mvn compile
