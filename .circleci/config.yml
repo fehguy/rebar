@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
     docker:
+      - image: foundationdb/foundationdb
       - image: circleci/openjdk:8-jdk
 
     working_directory: ~/repo
