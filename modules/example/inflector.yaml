@@ -1,0 +1,12 @@
+controllerPackage: org.eatbacon.example.controllers
+modelPackage:  org.eatbacon.example.models
+swaggerUrl: ./src/main/swagger/swagger.yaml
+modelMappings:
+  Address : org.eatbacon.example.models.Address
+  ModelApiResponse : org.eatbacon.example.models.ModelApiResponse
+  Person : org.eatbacon.example.models.Person
+rootPath: /api
+entityProcessors:
+  - json
+  - xml
+  - yaml
