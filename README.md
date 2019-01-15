@@ -175,6 +175,9 @@ storing references between objects and keeping a shallow tuple-set
 may be ideal. 
 * Optimizations. Too many to list, some have been documented in 
 souce with TODOs.
+* Delete not supported. Easy to add, just not yet
+* Transaction interface not added. Needs some thought, but not in
+the code yet
 
 ## Future Work
 Here are some thoughts on future work with this library.
