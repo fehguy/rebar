@@ -38,4 +38,4 @@ jobs:
 
       - run:
           name: run integration tests
-          command: mvn package integration-test
+          command: mvn install integration-test
