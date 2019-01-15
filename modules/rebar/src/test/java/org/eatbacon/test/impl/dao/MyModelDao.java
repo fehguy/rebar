@@ -61,4 +61,8 @@ public class MyModelDao extends AbstractDao<MyModel> {
     public List<MyModel> findByZip(String zip) {
         return super.find(Filters.eq("address", "zip", zip));
     }
+
+    public List<MyModel> findByState(String state) {
+        return super.find(Filters.eq("address", "state", state));
+    }
 }

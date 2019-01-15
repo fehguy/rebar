@@ -99,7 +99,7 @@ public class MyModelDaoTest {
     }
 
     @Test
-    public void testFindByZip() {
+    public void testFindByIndexedValue() {
         MyModelDao dao = MyModelDao.getInstance();
 
         MyModel model = new MyModel()
@@ -116,6 +116,35 @@ public class MyModelDaoTest {
 
         List<MyModel> filtered = dao.findByZip("94022-1993");
         assertTrue(filtered.size() == 1);
+
+        filtered = dao.findByState("CA");
+        assertTrue(filtered.size() >= 1);
+
+        filtered = dao.findByState("ZZZ");
+        assertTrue(filtered.size() == 0);
+    }
+
+    @Test
+    public void testFindByNonIndexedValue() {
+        MyModelDao dao = MyModelDao.getInstance();
+
+        MyModel model = new MyModel()
+                .id("1006")
+                .name("Grant")
+                .createdAt(new Date())
+                .address(new Address()
+                        .street("12345 El Monte Blvd")
+                        .city("Los Altos Hills")
+                        .state("CA")
+                        .zip("94022-1993")
+                ).childNames(Arrays.asList(15, 16));
+        dao.insert(model);
+
+        List<MyModel> filtered = dao.findByState("CA");
+        assertTrue(filtered.size() >= 1);
+
+        filtered = dao.findByState("ZZZ");
+        assertTrue(filtered.size() == 0);
     }
 
     @Test
