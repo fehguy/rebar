@@ -29,7 +29,7 @@ jobs:
           - v1-dependencies-{{ checksum "pom.xml" }}
           - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+#      - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
@@ -38,4 +38,4 @@ jobs:
 
       - run:
           name: run integration tests
-          command: mvn package integration-test
+          command: mvn install integration-test

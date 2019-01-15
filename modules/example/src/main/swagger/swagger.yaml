@@ -1,0 +1,94 @@
+swagger: "2.0"
+info:
+  description: "Shows how to get started with FDB + Java"
+  version: "1.0.0"
+  title: "Sample Rebar Project"
+  contact:
+    name: "Tony Tam"
+    email: "tony@eatbacon.org"
+paths:
+  /people/{id}:
+    get:
+      tags:
+      - "People"
+      operationId: "findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The ID of the user to look up"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "User object for the requested ID"
+          schema:
+            $ref: "#/definitions/Person"
+        404:
+          description: "No user found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /people:
+    post:
+      tags:
+      - "People"
+      operationId: "addPerson"
+      parameters:
+      - in: "body"
+        name: "person"
+        required: true
+        schema:
+          $ref: "#/definitions/Person"
+      responses:
+        201:
+          description: "person successfully created"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        409:
+          description: "a similar user already exists"
+definitions:
+  Person:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        readOnly: true
+      firstName:
+        type: "string"
+        example: "Bob"
+      lastName:
+        type: "string"
+        example: "Dobbs"
+      address:
+        $ref: "#/definitions/Address"
+      gender:
+        type: "string"
+        example: "M"
+  Address:
+    type: "object"
+    properties:
+      street:
+        type: "string"
+        example: "12345 El Monte Blvd"
+      street2:
+        type: "string"
+        example: "Building 1"
+      city:
+        type: "string"
+        example: "Los Altos Hills"
+      state:
+        type: "string"
+        example: "CA"
+      zip:
+        type: "string"
+        example: "94022"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+        example: 400
+      message:
+        type: "string"
+        example: "invalid input!"
